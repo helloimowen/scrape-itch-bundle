@@ -103,7 +103,7 @@ def parse_page(page_contents, url, page_num):
         single_game['link'] = title.find('a').get('href')
         platforms = title.find_all('span')
         clean = map(lambda x : x.get('title').replace('Available for ', ''), platforms)
-        single_game['platform(s)'] = ', '.join(list(clean))
+        single_game['platforms'] = ', '.join(list(clean))
         single_game['pg'] = page_num # provides the page number on each item, and splits things up visually 
         game_list.append(single_game)
 
