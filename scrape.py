@@ -73,6 +73,15 @@ def authenticate(driver, user, password): # Authentication step if you've regist
 
     return 
 
+def first_page(base, secret, element, user, password, driver): # get first page only. Useful for testing.
+    page_num = 1
+    parse_url = base + secret + element + str(page_num)
+    not_found_page = False 
+    results_list = []
+    not_found_page,results = grab_page(parse_url, page_num, driver, user, password)
+    results_list.append(results)
+    parse_url,page_num = splice_and_increment(parse_url,element)
+    return results_list
 
 def loop_pages(base, secret, element, user, password, driver):
     page_num = 1
@@ -93,7 +102,7 @@ def parse_page(page_contents, url, page_num): # parses DOM for game names and de
     game_list = []
     for title in titles:
         single_game = {}
-        single_game['title'] = title.find(class_='game_title').get_text()
+        single_game['_title'] = title.find(class_='game_title').get_text()
         single_game['description'] = title.find(class_='game_short_text').get_text()
         single_game['author'] = title.find(class_='game_author').get_text().replace('by ', '')
         single_game['pg'] = page_num # provides the page number on each item, and splits things up visually        
