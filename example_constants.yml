@@ -1,0 +1,7 @@
+url_base: 'https://itch.io/bundle/download/' # The start of the URL, before the secret code. 
+bundle_secret: 'not_gonna_tell' #bundle download pages are given their own secret. Placed after '/download/'
+page_element: '?page=' # The url bit to increment and pull. 
+web_driver_location: # Browser driver location for selenium 
+user_agent: 'Mozilla/5.0 beep boop bot agent' # user agent to send to the page. 
+itch_user: 'username' # Itch username. Needed if you authenticated your bundle with your account. 
+itch_pw: 'password' # Itch password. Needed if you authenticated your bundle with your account. 
