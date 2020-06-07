@@ -13,11 +13,13 @@ def get_constants(yaml_file_name): # Grabs the initial constants from contants.y
     contents = yaml.load(yaml_file, Loader=yaml.FullLoader)
     return contents 
 
+
 def splice_and_increment(url,element): # moves to next page 
     index = url.find(element)
     page_num = int(url[index+len(element):])
     page_num += 1
     return url[:index+len(element)] + str(page_num), page_num
+
 
 def check_redirect(driver):
     try: # Looking for alternatives to this try/except.
@@ -26,12 +28,14 @@ def check_redirect(driver):
     except: 
         return False 
 
+
 def check_404(driver):
     try: # Looking for alternatives to this try/except.
         elements = WebDriverWait(driver, 1).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".not_found_page")))
         return True
     except: 
         return False 
+
 
 def grab_page(full_url, page_num, driver, user, password): # makes request for page.  
 
@@ -47,15 +51,10 @@ def grab_page(full_url, page_num, driver, user, password): # makes request for p
         authenticate(driver, user, password)
         driver.get(full_url)
 
-
-    try: # Eventually switch to waiting for elements when i do not have a headache
+    try:
         element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".game_title")))
     finally:
-        result_dict = parse_page(driver.page_source, full_url, page_num)
-
-    # time.sleep(0.5)
-
-    # result_dict = parse_page(driver.page_source, full_url)
+        result_dict = parse_page(driver.page_source.encode('utf-8'), full_url, page_num)
 
     return False, result_dict
 
@@ -73,29 +72,22 @@ def authenticate(driver, user, password): # Authentication step if you've regist
 
     return 
 
-def first_page(base, secret, element, user, password, driver): # get first page only. Useful for testing.
+# Loops through the pages. Pass in True to test to just get the first page. 
+def loop_pages(base, secret, element, user, password, driver, test=False):
     page_num = 1
     parse_url = base + secret + element + str(page_num)
-    not_found_page = False 
-    results_list = []
-    not_found_page,results = grab_page(parse_url, page_num, driver, user, password)
-    results_list.append(results)
-    parse_url,page_num = splice_and_increment(parse_url,element)
-    return results_list
-
-def loop_pages(base, secret, element, user, password, driver):
-    page_num = 1
-    parse_url = base + secret + element + str(page_num)
-    not_found_page = False 
+    not_found_page=False
     results_list = []
     while not_found_page == False:
         not_found_page,results = grab_page(parse_url, page_num, driver, user, password)
         results_list.append(results)
         parse_url,page_num = splice_and_increment(parse_url,element)
+        if test:
+            break
     return results_list
     
-
-def parse_page(page_contents, url, page_num): # parses DOM for game names and descriptions. Outputs dictionary of page content. 
+# parses DOM for game names and descriptions. Outputs dictionary of page content. 
+def parse_page(page_contents, url, page_num): 
     page_object = BeautifulSoup(page_contents, features="html.parser")
     titles = page_object.find_all(class_='game_row_data')
     page_dict = {}
@@ -112,12 +104,8 @@ def parse_page(page_contents, url, page_num): # parses DOM for game names and de
     return page_dict
 
 
-    #print(page_object.prettify())
-    # return name_dict
-
-
 def name_dict_to_yaml(results): 
-    return yaml.dump(results, default_flow_style=False)
+    return yaml.dump(results, default_flow_style=False,encoding='utf-8',allow_unicode=True)
 
 
 def write_page_to_files(json_content, yaml_content):
@@ -128,7 +116,7 @@ def write_page_to_files(json_content, yaml_content):
 
     print('writing yaml file')
     f = open("game_list.yml", "w")
-    f.write(yaml_content)
+    f.write(yaml_content.decode("utf-8") )
     f.close()
 
 page_pieces = get_constants('constants.yml')
@@ -138,11 +126,17 @@ options = Options()
 options.headless = True
 options.add_argument("--window-size=1920,1080")
 options.add_argument('user-agent=' + page_pieces['user_agent'])
-driver = webdriver.Chrome(options=options, executable_path=page_pieces['web_driver_location']) # start selenium driver once. 
+driver = webdriver.Chrome(options=options, 
+                        executable_path=page_pieces['web_driver_location']) # start selenium driver once. 
 
 print("Done.")
 
-results = loop_pages(page_pieces['url_base'], page_pieces['bundle_secret'], page_pieces['page_element'], page_pieces['itch_user'], page_pieces['itch_pw'], driver)
+results = loop_pages(page_pieces['url_base'], 
+                    page_pieces['bundle_secret'], 
+                    page_pieces['page_element'], 
+                    page_pieces['itch_user'], 
+                    page_pieces['itch_pw'], 
+                    driver, test=False)
 
 yaml_content = name_dict_to_yaml(results)
 

@@ -43,8 +43,8 @@
     pg: 1
   - _title: Time Stone
     author: Scared Square Games
-    description: "Uncover the Professor\u2019s secret and rescue him from the evil\
-      \ clutches of the Warlock!"
+    description: Uncover the Professor’s secret and rescue him from the evil clutches
+      of the Warlock!
     pg: 1
   - _title: east van EP
     author: ceMelusine
@@ -69,8 +69,8 @@
     pg: 1
   - _title: Not the Robots
     author: 2DArray
-    description: "Not The Robots is this year\u2019s most exciting Roguelike Stealth\
-      \ Furniture Eating Simulator."
+    description: Not The Robots is this year’s most exciting Roguelike Stealth Furniture
+      Eating Simulator.
     pg: 1
   - _title: Paranautical Activity
     author: CodeAvarice
@@ -140,10 +140,10 @@
     pg: 2
   - _title: The Secret of Tremendous Corporation
     author: dos
-    description: "Discover the legendary Secret\u2122 and save the game industry!\
-      \ (Global Game Jam 2015)"
+    description: Discover the legendary Secret™ and save the game industry! (Global
+      Game Jam 2015)
     pg: 2
-  - _title: "Ast\xE6ria"
+  - _title: Astæria
     author: prophet goddess
     description: first-person poetry visualizer
     pg: 2
@@ -218,7 +218,7 @@
     description: A narrative racing game set in the roaring Italian 70s
     pg: 2
   - _title: Haque
-    author: "Super\u2234Try"
+    author: Super∴Try
     description: /hak/ Fight cute monsters! Avoid death! Save the Game
     pg: 2
   - _title: Borb the Birb
@@ -275,7 +275,7 @@
     author: Sophie Houlden
     description: You have been drawn to a mysterious place, what secrets does it hold?
     pg: 3
-  - _title: "BRK\xD6UT"
+  - _title: BRKÖUT
     author: Fisher
     description: Discover a terrible secret hidden inside your computer.
     pg: 3
@@ -343,7 +343,7 @@
     description: Ambient Arcade Runner
     pg: 3
   - _title: Lacrymo Tennis 2016 (+ 2018)
-    author: "Les Jeux d'la T\xEAte"
+    author: Les Jeux d'la Tête
     description: No one does bourgeois revolution quite like the French.
     pg: 3
   - _title: Empyrean Frontier
@@ -354,7 +354,7 @@
     author: KalleMacD
     description: A mystery told five paragraphs at a time.
     pg: 3
-  - _title: "\u76C6\u683D \u30AB\u30EC\u30F3\u30C0\u30FC (BONSAI CALENDAR)"
+  - _title: 盆栽 カレンダー (BONSAI CALENDAR)
     author: Josh Benavente
     description: A piece of software that helps one take good care of his/her bonsai
       tree.
@@ -413,7 +413,7 @@
       to interact. Sit back and enjoy.
     pg: 4
   - _title: Pixel Session Vol.1
-    author: "R\xE9my \"Trasevol_Dog\" Devaux"
+    author: Rémy "Trasevol_Dog" Devaux
     description: Five Short Experimental Games
     pg: 4
   - _title: Night in the Woods
@@ -421,7 +421,7 @@
     description: At the end of everything, hold onto anything.
     pg: 4
   - _title: Graveyard Shift
-    author: "Ahmet Kamil Kele\u015F"
+    author: Ahmet Kamil Keleş
     description: Spooky & cute FPS!
     pg: 4
   - _title: '[HammerA] HammerTime !'
@@ -461,8 +461,8 @@
     pg: 4
   - _title: Thing-in-Itself
     author: Party for Introverts
-    description: "\u201CThing-in-Itself\u201D is an interactive short story about\
-      \ the struggles of understanding another human being."
+    description: “Thing-in-Itself” is an interactive short story about the struggles
+      of understanding another human being.
     pg: 4
   - _title: Pixel art Forest
     author: edermunizz
@@ -481,7 +481,7 @@
     description: Wave to the people! Blow them kisses!
     pg: 4
   - _title: A Kishoutenketsu in the countryside
-    author: "R\xE9mi T\xF6\xF6t\xE4t\xE4"
+    author: Rémi Töötätä
     description: Explore the outdoors, face four puzzles and live great adventures.
     pg: 4
   - _title: StarFighter R&D HD Edition
@@ -591,7 +591,7 @@
     pg: 5
   - _title: Atomic Heist
     author: Live Aliens
-    description: "Grab the atomic core and fight to escape\u2026if you can."
+    description: Grab the atomic core and fight to escape…if you can.
     pg: 5
   - _title: Bonbon
     author: Aetheric Games
@@ -813,7 +813,7 @@
     description: An atmospheric puzzle-platformer-adventure.
     pg: 7
   - _title: Tape
-    author: "\u039BERIF\xB0RM"
+    author: ΛERIF°RM
     description: Intimate project management designed for artists and designers
     pg: 7
   - _title: Long Lost Boys of Nowhereland
@@ -822,8 +822,8 @@
     pg: 7
   - _title: Brathian
     author: pangake
-    description: "\u200BA cool and cute game to fulfill your retro platformer needs.\
-      \ With a little bit of exploration too :)"
+    description: ​A cool and cute game to fulfill your retro platformer needs. With
+      a little bit of exploration too :)
     pg: 7
   - _title: Fossil Hunters
     author: Reptoid Games
@@ -844,13 +844,13 @@
     description: You play as Hiro / He works at the factory / Work hard, Hiro-san!
     pg: 7
   - _title: Task Force Kampas
-    author: "\uFF43\uFF41\uFF53\uFF49\uFF4F\uFF50\uFF45\uFF41"
+    author: ｃａｓｉｏｐｅａ
     description: A classic shoot em' up on steroids.
     pg: 7
   - _title: Central Limit Theorem
     author: Amicable Animal
-    description: "An arcade shooter where enemies learn behaviours from those that\
-      \ went before \u2022 WebGL Demo \u2022 Win/Mac/Linux Versions"
+    description: An arcade shooter where enemies learn behaviours from those that
+      went before • WebGL Demo • Win/Mac/Linux Versions
     pg: 7
   - _title: 'Real Winners: Victoryball'
     author: Pizza Curse
@@ -943,8 +943,8 @@
     pg: 8
   - _title: El Interrogatorio
     author: TwineDoctors
-    description: "Ha llegado un nuevo caso a la comisar\xEDa y debes interrogar al\
-      \ principal sospechoso."
+    description: Ha llegado un nuevo caso a la comisaría y debes interrogar al principal
+      sospechoso.
     pg: 8
   - _title: The Land of Glass
     author: Dual Wield Software
@@ -971,10 +971,9 @@
     author: thatguynm
     description: A short game about hanging out and wandering a mall
     pg: 8
-  - _title: "No cortar\xE1s a tu hermana con el filo de esta espada"
+  - _title: No cortarás a tu hermana con el filo de esta espada
     author: TwineDoctors
-    description: "Viaja por la ciudad reclutando bandas para vencer a la invasi\xF3\
-      n."
+    description: Viaja por la ciudad reclutando bandas para vencer a la invasión.
     pg: 8
   - _title: Nonsense at Nightfall
     author: Siegfried Croes
@@ -1165,7 +1164,7 @@
     author: Glanderco
     description: ~*LET'S DRAW*~
     pg: 10
-  - _title: "Antigas Constela\xE7\xF5es (sobre a Vila Itoror\xF3)"
+  - _title: Antigas Constelações (sobre a Vila Itororó)
     author: Menotti
     description: marginalized heritage as blazing celestial bodies - a VR experience
     pg: 10
@@ -1179,7 +1178,7 @@
     pg: 10
   - _title: Outpost Horizon Station
     author: oldmanofthefire
-    description: "Bullet-hell platformer on a rotating 360\xB0 platform"
+    description: Bullet-hell platformer on a rotating 360° platform
     pg: 10
   - _title: Sewer Rave
     author: Autumn Rain
@@ -1322,7 +1321,7 @@
     author: bluehexagons
     description: An uncompromising platform fighter
     pg: 11
-  - _title: "Space Duet\u2122"
+  - _title: Space Duet™
     author: Matthew Alan Estock
     description: Duel in space with friends
     pg: 11
@@ -1444,10 +1443,10 @@
     author: ultigonio
     description: A brisk, meditative puzzle action game!
     pg: 12
-  - _title: "Whipped And Steamy \u2022 Cosplay Caf\xE9"
+  - _title: Whipped And Steamy • Cosplay Café
     author: Whales And Games
-    description: "In a town where adult media is the new best thing the Whipped and\
-      \ Steamy Caf\xE9 is the best fun for all cosplayers!"
+    description: In a town where adult media is the new best thing the Whipped and
+      Steamy Café is the best fun for all cosplayers!
     pg: 12
   - _title: Tiny Dangerous Dungeons
     author: Adventure Islands
@@ -1575,7 +1574,7 @@
     pg: 13
   - _title: Towayami
     author: Andrea Pignataro
-    description: "\u6C38\u4E45\u95C7"
+    description: 永久闇
     pg: 13
   - _title: DragonRuby Game Toolkit
     author: DragonRuby
@@ -1664,8 +1663,8 @@
     pg: 13
   - _title: What Is Here?
     author: Yubi
-    description: "\u2018What is Here?\u2019 is a game about building a myth around\
-      \ a being through a community\u2019s eyes."
+    description: ‘What is Here?’ is a game about building a myth around a being through
+      a community’s eyes.
     pg: 13
 - https://itch.io/bundle/download/jfQZperdE2sgwxLLjex7TxqJKIXFxDWieWC3_JlO?page=14:
   - _title: Your Magic Circle
@@ -1899,8 +1898,8 @@
     pg: 15
   - _title: Bedtime Bestiary
     author: Goatmeal Games
-    description: "\u200BThis is a game about a child's toys overcoming the terrible\
-      \ creatures of that child\u2019s imagination."
+    description: ​This is a game about a child's toys overcoming the terrible creatures
+      of that child’s imagination.
     pg: 15
   - _title: Inner
     author: DarkStone Digital
@@ -1969,15 +1968,14 @@
     author: Pammu
     description: A Trashy Game About Trashy Writers Writing Trashy Romance
     pg: 16
-  - _title: "Vincent: The Secret of Myers | \u6587\u68EE\uFF1A\u6885\u5C14\u65AF\u7684\
-      \u79D8\u5BC6"
+  - _title: 'Vincent: The Secret of Myers | 文森：梅尔斯的秘密'
     author: dino999z
     description: ''
     pg: 16
   - _title: Pleroma
     author: Aleks Samoylov
-    description: "Are you pulling my leg or are you genuinely having one of your \u2026\
-      \ departures?"
+    description: Are you pulling my leg or are you genuinely having one of your …
+      departures?
     pg: 16
   - _title: Flashover MegaSector
     author: happy_frog_games
@@ -2000,7 +1998,7 @@
     author: Rubeki
     description: Climb your way to the top of a strange tower in a strange land
     pg: 16
-  - _title: "99\xA2 Chamber of Death"
+  - _title: 99¢ Chamber of Death
     author: C.D. Guanzon
     description: Somewhere in New Jungle, the Big Boss searches for the Power.
     pg: 16
@@ -2538,8 +2536,8 @@
     pg: 20
   - _title: Peace of Mind
     author: Joe Burns
-    description: "You just recently closed on your dream home. It\u2019s perfect!\
-      \ Well, almost\u2026"
+    description: You just recently closed on your dream home. It’s perfect! Well,
+      almost…
     pg: 20
   - _title: Night in the Storm
     author: Pablo Dapena
@@ -2581,7 +2579,7 @@
     author: molleindustria
     description: Pave the road to a post-capitalist society
     pg: 21
-  - _title: "It's Dangerous To Go Alone \u2014 Take This"
+  - _title: It's Dangerous To Go Alone — Take This
     author: Margaret Catter
     description: A spur of the moment RP game where you play an adventure using only
       the content of the GM's bag.
@@ -2679,8 +2677,8 @@
     pg: 21
   - _title: Blood Bullets & Ballet
     author: Nebulaproyects
-    description: "La bailarina debe usar sus armas anti blindaje para detener una\
-      \ operaci\xF3n de la mafia"
+    description: La bailarina debe usar sus armas anti blindaje para detener una operación
+      de la mafia
     pg: 21
   - _title: Woter-a tale of two water cans - Game jam demo
     author: Electrodev
@@ -2760,7 +2758,7 @@
     description: Featuring 800+ entities including Publishers, Funding, Awards, Industry
       Bodies, Networks and more...
     pg: 22
-  - _title: "MORFOSI\uFF5C\u83AB\u6CD5\u897F"
+  - _title: MORFOSI｜莫法西
     author: UniDot Studio
     description: A Metamorphosis Stealth Psychological Horror Game
     pg: 22
@@ -2909,7 +2907,7 @@
     author: Matthew Lawrence
     description: Fly back home with damaged wings
     pg: 23
-  - _title: "\u6A3A\u30F6\u539F\u8131\u51FA - Escape from Kabagahara"
+  - _title: 樺ヶ原脱出 - Escape from Kabagahara
     author: Edouard Moinard
     description: You see a path to Kabagahara, will you take it?
     pg: 23
@@ -3093,7 +3091,7 @@
     description: The Valley of Super Flowers is a 2D Platform Action game in which
       the valley is captured by an Evil Satanis ruler.
     pg: 25
-  - _title: "N\xF3tt & Dagr"
+  - _title: Nótt & Dagr
     author: VolcanicDolphin
     description: Norse mythology puzzle co-op.
     pg: 25
