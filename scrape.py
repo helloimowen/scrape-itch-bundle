@@ -1,6 +1,7 @@
 import yaml 
 import time
 import json
+import csv
 from bs4 import BeautifulSoup 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -77,11 +78,13 @@ def loop_pages(base, secret, element, user, password, driver, test=False):
     page_num = 1
     parse_url = base + secret + element + str(page_num)
     not_found_page=False
-    results_list = []
+    results_list = {}
     while not_found_page == False:
         not_found_page,results = grab_page(parse_url, page_num, driver, user, password)
-        results_list.append(results)
-        parse_url,page_num = splice_and_increment(parse_url,element)
+        if results:
+            results_list.update(results)
+            parse_url,page_num = splice_and_increment(parse_url,element)
+
         if test:
             break
     return results_list
@@ -95,9 +98,13 @@ def parse_page(page_contents, url, page_num):
     for title in titles:
         single_game = {}
         single_game['_title'] = title.find(class_='game_title').get_text()
+        single_game['link'] = title.find('a').get('href')
         single_game['description'] = title.find(class_='game_short_text').get_text()
         single_game['author'] = title.find(class_='game_author').get_text().replace('by ', '')
-        single_game['pg'] = page_num # provides the page number on each item, and splits things up visually        
+        single_game['pg'] = page_num # provides the page number on each item, and splits things up visually 
+        platforms = title.find_all('span')
+        clean = map(lambda x : x.get('title').replace('Available for ', ''), platforms)
+        single_game['for'] = ', '.join(list(clean))
         game_list.append(single_game)
 
     page_dict[url] = game_list
@@ -107,8 +114,16 @@ def parse_page(page_contents, url, page_num):
 def name_dict_to_yaml(results): 
     return yaml.dump(results, default_flow_style=False,encoding='utf-8',allow_unicode=True)
 
+def flatten_for_csv(structure):
+    #print(structure)
+    flat_list = []
+    for link, game_lists in structure.items():
+        for game in game_lists:
+            game['example_download_link'] = link
+            flat_list.append(game)
+    return flat_list
 
-def write_page_to_files(json_content, yaml_content):
+def write_page_to_files(json_content, yaml_content, csv_content):
     print('writing json file')
     f = open("game_list.json", "w")
     f.write(json.dumps(json_content))
@@ -117,6 +132,13 @@ def write_page_to_files(json_content, yaml_content):
     print('writing yaml file')
     f = open("game_list.yml", "w")
     f.write(yaml_content.decode("utf-8") )
+    f.close()
+
+    print('writing csv file')
+    f = open("game_list.csv", "w")
+    dict_writer = csv.DictWriter(f, csv_content[0].keys())
+    dict_writer.writeheader()
+    dict_writer.writerows(csv_content)
     f.close()
 
 page_pieces = get_constants('constants.yml')
@@ -140,7 +162,9 @@ results = loop_pages(page_pieces['url_base'],
 
 yaml_content = name_dict_to_yaml(results)
 
-write_page_to_files(results, yaml_content)
+csv_content = flatten_for_csv(results)
+
+write_page_to_files(results, yaml_content, csv_content)
 
 
 driver.quit()
