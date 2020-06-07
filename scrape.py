@@ -98,13 +98,13 @@ def parse_page(page_contents, url, page_num):
     for title in titles:
         single_game = {}
         single_game['_title'] = title.find(class_='game_title').get_text()
-        single_game['link'] = title.find('a').get('href')
-        single_game['description'] = title.find(class_='game_short_text').get_text()
         single_game['author'] = title.find(class_='game_author').get_text().replace('by ', '')
-        single_game['pg'] = page_num # provides the page number on each item, and splits things up visually 
+        single_game['description'] = title.find(class_='game_short_text').get_text()
+        single_game['link'] = title.find('a').get('href')
         platforms = title.find_all('span')
         clean = map(lambda x : x.get('title').replace('Available for ', ''), platforms)
         single_game['for'] = ', '.join(list(clean))
+        single_game['pg'] = page_num # provides the page number on each item, and splits things up visually 
         game_list.append(single_game)
 
     page_dict[url] = game_list
@@ -112,7 +112,7 @@ def parse_page(page_contents, url, page_num):
 
 
 def name_dict_to_yaml(results): 
-    return yaml.dump(results, default_flow_style=False,encoding='utf-8',allow_unicode=True)
+    return yaml.dump(results, default_flow_style=False,encoding='utf-8',allow_unicode=True,sort_keys=False)
 
 def flatten_for_csv(structure):
     #print(structure)
