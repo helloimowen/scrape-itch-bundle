@@ -17,7 +17,7 @@ def splice_and_increment(url,element): # moves to next page
     index = url.find(element)
     page_num = int(url[index+len(element):])
     page_num += 1
-    return url[:index+len(element)] + str(page_num)
+    return url[:index+len(element)] + str(page_num), page_num
 
 def check_redirect(driver):
     try: # Looking for alternatives to this try/except.
@@ -33,12 +33,11 @@ def check_404(driver):
     except: 
         return False 
 
-def grab_page(full_url, driver, user, password): # makes request for page.  
+def grab_page(full_url, page_num, driver, user, password): # makes request for page.  
 
     print("Grabbing ", full_url)
 
     driver.get(full_url)
-
 
     if check_404(driver):
         print('Hit 404 page. Finishing process.')
@@ -48,15 +47,15 @@ def grab_page(full_url, driver, user, password): # makes request for page.
         authenticate(driver, user, password)
         driver.get(full_url)
 
-    # else:
-    #     try: # Eventually switch to waiting for elements when i do not have a headache
-    #         element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".game_title")))
-    #     finally:
-    #         result_dict = parse_page(driver.page_source)
 
-    time.sleep(0.5)
+    try: # Eventually switch to waiting for elements when i do not have a headache
+        element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".game_title")))
+    finally:
+        result_dict = parse_page(driver.page_source, full_url, page_num)
 
-    result_dict = parse_page(driver.page_source, full_url)
+    # time.sleep(0.5)
+
+    # result_dict = parse_page(driver.page_source, full_url)
 
     return False, result_dict
 
@@ -76,17 +75,18 @@ def authenticate(driver, user, password): # Authentication step if you've regist
 
 
 def loop_pages(base, secret, element, user, password, driver):
-    parse_url = base + secret + element + '1'
+    page_num = 1
+    parse_url = base + secret + element + str(page_num)
     not_found_page = False 
     results_list = []
     while not_found_page == False:
-        not_found_page,results = grab_page(parse_url, driver, user, password)
+        not_found_page,results = grab_page(parse_url, page_num, driver, user, password)
         results_list.append(results)
-        parse_url = splice_and_increment(parse_url,element)
+        parse_url,page_num = splice_and_increment(parse_url,element)
     return results_list
     
 
-def parse_page(page_contents, url): # parses DOM for game names and descriptions. Outputs dictionary of page content. 
+def parse_page(page_contents, url, page_num): # parses DOM for game names and descriptions. Outputs dictionary of page content. 
     page_object = BeautifulSoup(page_contents, features="html.parser")
     titles = page_object.find_all(class_='game_row_data')
     page_dict = {}
@@ -96,6 +96,7 @@ def parse_page(page_contents, url): # parses DOM for game names and descriptions
         single_game['title'] = title.find(class_='game_title').get_text()
         single_game['description'] = title.find(class_='game_short_text').get_text()
         single_game['author'] = title.find(class_='game_author').get_text().replace('by ', '')
+        single_game['pg'] = page_num # provides the page number on each item, and splits things up visually        
         game_list.append(single_game)
 
     page_dict[url] = game_list
