@@ -146,23 +146,32 @@ def flatten_for_csv(structure):
             flat_list.append(game)
     return flat_list
 
-def write_page_to_files(json_content, yaml_content, csv_content, append):
+def write_page_to_files(json_content, yaml_content, csv_content, label):
     print('writing json file')
-    f = open(append + "_game_list.json", "w")
+    f = open(label + "_game_list.json", "w")
     f.write(json.dumps(json_content))
     f.close()
 
     print('writing yaml file')
-    f = open(append + "_game_list.yml", "w")
+    f = open(label + "_game_list.yml", "w")
     f.write(yaml_content.decode("utf-8") )
     f.close()
 
     print('writing csv file')
-    f = open(append + "_game_list.csv", "w")
+    f = open(label + "_game_list.csv", "w")
     dict_writer = csv.DictWriter(f, csv_content[0].keys())
     dict_writer.writeheader()
     dict_writer.writerows(csv_content)
     f.close()
+
+def write_bundle_object(game_object, label):
+    yaml_content = name_dict_to_yaml(game_object)
+
+    csv_content = flatten_for_csv(game_object)
+
+    write_page_to_files(game_object, yaml_content, csv_content, label)
+
+
 
 def run_scrape_process():
     page_pieces = get_constants('constants.yml')
@@ -184,27 +193,27 @@ def run_scrape_process():
                         page_pieces['itch_pw'], 
                         driver, test=False)
 
-    yaml_content = name_dict_to_yaml(results)
-
-    csv_content = flatten_for_csv(results)
-
-    write_page_to_files(results, yaml_content, csv_content, 'current')
-
-
-
     driver.quit()
 
-def create_and_write_diff():
+    return results
+
+
+def create_and_diff(pass_new=None):
+    if pass_new:
+        new = pass_new
+    else:
+        new = restore_bundle_info('current_game_list.json')
+   
     old = restore_bundle_info('bundle_for_racial_justice_and_equality_first_release/game_list.json')
-    new = restore_bundle_info('current_game_list.json')
-
-    diff = make_diff(old, new)  
-
-    yaml_content = name_dict_to_yaml(diff)
-
-    csv_content = flatten_for_csv(diff)
-
-    write_page_to_files(diff, yaml_content, csv_content, 'new')
 
 
-create_and_write_diff()
+    return make_diff(old, new)  
+
+
+new_list = run_scrape_process()
+
+write_bundle_object(new_list, 'complete')
+
+diff = create_and_diff(pass_new=new_list)
+
+write_bundle_object(diff, 'new')
