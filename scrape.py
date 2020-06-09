@@ -9,6 +9,29 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 
+def restore_bundle_info(file_loc):
+    results = open(file_loc, 'r')
+    return json.load(results)
+
+
+def make_diff(old_bundle, new_bundle):
+    old_games = [] 
+    for link, game_list in old_bundle.items():
+            old_games += [game['title'] for game in game_list]
+
+    #print (old_games)
+    diff = {}
+    for link, game_list in new_bundle.items():
+        new_list = [game for game in game_list if game['title'] not in old_games]
+        if new_list:
+            diff[link] = new_list
+
+    print(diff)
+    
+    return diff
+
+
+
 def get_constants(yaml_file_name): # Grabs the initial constants from contants.yml
     yaml_file = open(yaml_file_name, 'r')
     contents = yaml.load(yaml_file, Loader=yaml.FullLoader)
@@ -123,48 +146,65 @@ def flatten_for_csv(structure):
             flat_list.append(game)
     return flat_list
 
-def write_page_to_files(json_content, yaml_content, csv_content):
+def write_page_to_files(json_content, yaml_content, csv_content, append):
     print('writing json file')
-    f = open("game_list.json", "w")
+    f = open(append + "_game_list.json", "w")
     f.write(json.dumps(json_content))
     f.close()
 
     print('writing yaml file')
-    f = open("game_list.yml", "w")
+    f = open(append + "_game_list.yml", "w")
     f.write(yaml_content.decode("utf-8") )
     f.close()
 
     print('writing csv file')
-    f = open("game_list.csv", "w")
+    f = open(append + "_game_list.csv", "w")
     dict_writer = csv.DictWriter(f, csv_content[0].keys())
     dict_writer.writeheader()
     dict_writer.writerows(csv_content)
     f.close()
 
-page_pieces = get_constants('constants.yml')
+def run_scrape_process():
+    page_pieces = get_constants('constants.yml')
 
-print("Starting webdriver...")
-options = Options()
-options.headless = True
-options.add_argument("--window-size=1920,1080")
-options.add_argument('user-agent=' + page_pieces['user_agent'])
-driver = webdriver.Chrome(options=options, 
-                        executable_path=page_pieces['web_driver_location']) # start selenium driver once. 
+    print("Starting webdriver...")
+    options = Options()
+    options.headless = True
+    options.add_argument("--window-size=1920,1080")
+    options.add_argument('user-agent=' + page_pieces['user_agent'])
+    driver = webdriver.Chrome(options=options, 
+                            executable_path=page_pieces['web_driver_location']) # start selenium driver once. 
 
-print("Done.")
+    print("Done.")
 
-results = loop_pages(page_pieces['url_base'], 
-                    page_pieces['bundle_secret'], 
-                    page_pieces['page_element'], 
-                    page_pieces['itch_user'], 
-                    page_pieces['itch_pw'], 
-                    driver, test=False)
+    results = loop_pages(page_pieces['url_base'], 
+                        page_pieces['bundle_secret'], 
+                        page_pieces['page_element'], 
+                        page_pieces['itch_user'], 
+                        page_pieces['itch_pw'], 
+                        driver, test=False)
 
-yaml_content = name_dict_to_yaml(results)
+    yaml_content = name_dict_to_yaml(results)
 
-csv_content = flatten_for_csv(results)
+    csv_content = flatten_for_csv(results)
 
-write_page_to_files(results, yaml_content, csv_content)
+    write_page_to_files(results, yaml_content, csv_content, 'current')
 
 
-driver.quit()
+
+    driver.quit()
+
+def create_and_write_diff():
+    old = restore_bundle_info('bundle_for_racial_justice_and_equality_first_release/game_list.json')
+    new = restore_bundle_info('current_game_list.json')
+
+    diff = make_diff(old, new)  
+
+    yaml_content = name_dict_to_yaml(diff)
+
+    csv_content = flatten_for_csv(diff)
+
+    write_page_to_files(diff, yaml_content, csv_content, 'new')
+
+
+create_and_write_diff()
