@@ -23,8 +23,8 @@ def make_diff(old_bundle, new_bundle):
     diff = {}
     for link, game_list in new_bundle.items():
         new_list = [game for game in game_list if game['title'] not in old_games]
-        
-        diff[link] = new_list
+        if new_list:
+            diff[link] = new_list
 
     print(diff)
     
@@ -153,12 +153,12 @@ def write_page_to_files(json_content, yaml_content, csv_content, append):
     f.close()
 
     print('writing yaml file')
-    f = open(append + "_current_game_list.yml", "w")
+    f = open(append + "_game_list.yml", "w")
     f.write(yaml_content.decode("utf-8") )
     f.close()
 
     print('writing csv file')
-    f = open(append + "_current_game_list.csv", "w")
+    f = open(append + "_game_list.csv", "w")
     dict_writer = csv.DictWriter(f, csv_content[0].keys())
     dict_writer.writeheader()
     dict_writer.writerows(csv_content)
